@@ -1,5 +1,6 @@
 package com.example.demo.member.controller;
 
+import com.example.demo.common.consts.Const;
 import com.example.demo.member.dto.*;
 import com.example.demo.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +15,6 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/members")
-    public ResponseEntity<MemberSaveResponseDto> save(@RequestBody MemberSaveRequestDto dto) {
-        return ResponseEntity.ok(memberService.save(dto));
-    }
-
     @GetMapping("/members")
     public ResponseEntity<List<MemberResponseDto>> getAll() {
         return ResponseEntity.ok(memberService.findAll());
@@ -29,13 +25,18 @@ public class MemberController {
         return ResponseEntity.ok(memberService.findOne(memberId));
     }
 
-    @PutMapping("/members/{memberId}")
-    public void update(@PathVariable Long memberId, @RequestBody MemberUpdateRequestDto dto) {
+    @PutMapping("/members")
+    public void update(
+            @SessionAttribute(name = Const.LOGIN_USER) Long memberId,
+            @RequestBody MemberUpdateRequestDto dto
+    ) {
         memberService.update(memberId, dto);
     }
 
     @DeleteMapping("/members/{memberId}")
-    public void delete(@PathVariable Long memberId) {
+    public void delete(
+            @SessionAttribute(name = Const.LOGIN_USER) Long memberId
+    ) {
         memberService.deleteById(memberId);
     }
 }

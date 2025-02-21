@@ -1,6 +1,8 @@
 package com.example.demo.auth.service;
 
+import com.example.demo.auth.dto.AuthLoginResponseDto;
 import com.example.demo.auth.dto.AuthSignupRequestDto;
+import com.example.demo.auth.dto.AuthLoginRequestDto;
 import com.example.demo.member.entity.Member;
 import com.example.demo.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,5 +19,12 @@ public class AuthService {
     public void signup(AuthSignupRequestDto dto) {
         Member member = new Member(dto.getEmail());
         memberRepository.save(member);
+    }
+
+    public AuthLoginResponseDto login(AuthLoginRequestDto dto) {
+        Member member = memberRepository.findByEmail(dto.getEmail()).orElseThrow(
+                () -> new IllegalStateException("해당 유저 확인 불가")
+        );
+        return new AuthLoginResponseDto(member.getId());
     }
 }
