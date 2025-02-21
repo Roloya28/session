@@ -29,7 +29,7 @@ public class AuthController {
 
         // 세션을 생성해야됨. 서비스의 로직보다는 컨트롤러가 해야하는일 (클라이언트와 소통하는 역할에 가까움)
         HttpSession session = request.getSession(); // 신규 세션 생성, JSESSIONID 쿠키 발급
-        session.setAttribute(Const.LOGIN_USER, result.getMemberId()); // 서버 메모리에 세션 저장
+        session.setAttribute(Const.LOGIN_MEMBER, result.getMemberId()); // 서버 메모리에 세션 저장
     }
 
     // 프론트입장에서도 그냥 JSESSIONID 지워버리면 그게 로그아웃임
