@@ -19,4 +19,8 @@ public class Member {
     public Member(String email) {
         this.email = email;
     }
+
+    public void update(String email) {
+        this.email = email;
+    }
 }

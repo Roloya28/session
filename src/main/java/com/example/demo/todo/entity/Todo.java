@@ -19,4 +19,8 @@ public class Todo {
     public Todo(String content) {
         this.content = content;
     }
+
+    public void update(String content) {
+        this.content = content;
+    }
 }
