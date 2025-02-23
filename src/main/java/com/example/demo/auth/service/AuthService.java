@@ -21,6 +21,7 @@ public class AuthService {
         memberRepository.save(member);
     }
 
+    @Transactional(readOnly = true)
     public AuthLoginResponseDto login(AuthLoginRequestDto dto) {
         Member member = memberRepository.findByEmail(dto.getEmail()).orElseThrow(
                 () -> new IllegalStateException("해당 유저 확인 불가")
